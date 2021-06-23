@@ -15,10 +15,8 @@ const create = async ({
   description,
   price
 }: ICreate) => {
-
-  const now = new Date().toISOString()
-
   const id = uuidv4()
+  const now = new Date().toISOString()
 
   const product = {
     id,
