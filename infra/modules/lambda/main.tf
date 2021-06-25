@@ -13,4 +13,8 @@ resource "aws_lambda_function" "main" {
   s3_key        = "deploy/${var.name}/latest.zip"
   timeout       = "5"
   memory_size   = "1024"
+
+  environment {
+    variables = var.enviroments
+  }
 }

@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "lambda_get_product"{
+data "aws_iam_policy_document" "lambda_get_products"{
   statement {
     actions = ["logs:*"]
     resources = ["*"]
@@ -15,9 +15,13 @@ data "aws_iam_policy_document" "lambda_get_product"{
   }
 }
 
-module "lambda_get_product" {
+module "lambda_get_products" {
   source        = "./modules/lambda"
-  policy_json   = data.aws_iam_policy_document.lambda_get_product.json
+  policy_json   = data.aws_iam_policy_document.lambda_get_products.json
   name          = "get-products"
   handler       = "src/controllers/products/get/index.handler"
+
+  enviroments = {
+    DYNAMO_TABLE_PRODUCTS: "products"
+  }
 }

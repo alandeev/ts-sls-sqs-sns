@@ -9,3 +9,7 @@ variable "policy_json" {
 variable "handler" {
   default = ""
 }
+
+variable "enviroments" {
+  type = map
+}
