@@ -1,3 +1,4 @@
 create-product
 get-product
 get-products
+remove-product

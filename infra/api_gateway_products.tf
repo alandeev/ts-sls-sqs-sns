@@ -31,6 +31,23 @@ resource "aws_api_gateway_integration" "integration_get_product" {
   uri                     = module.lambda_get_product.invoke_arn
 }
 
+resource "aws_api_gateway_method" "method_remove_product" {
+  rest_api_id             = aws_api_gateway_rest_api.base_api.id
+  resource_id             = aws_api_gateway_resource.productId.id
+  http_method             = "DELETE"
+  authorization           = "NONE"
+}
+
+resource "aws_api_gateway_integration" "integration_remove_product" {
+  rest_api_id             = aws_api_gateway_rest_api.base_api.id
+  resource_id             = aws_api_gateway_method.method_remove_product.resource_id
+  http_method             = aws_api_gateway_method.method_remove_product.http_method
+
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = module.lambda_remove_product.invoke_arn
+}
+
 resource "aws_api_gateway_method" "method_get_products" {
   rest_api_id             = aws_api_gateway_rest_api.base_api.id
   resource_id             = aws_api_gateway_resource.products.id
@@ -70,9 +87,9 @@ resource "aws_api_gateway_integration" "integration_create_product" {
 resource "aws_api_gateway_deployment" "deploy_routers" {
    depends_on = [
       aws_api_gateway_integration.integration_get_product,
+      aws_api_gateway_integration.integration_remove_product,
       aws_api_gateway_integration.integration_get_products,
-      aws_api_gateway_integration.integration_create_product
-
+      aws_api_gateway_integration.integration_create_product,
    ]
 
    rest_api_id = aws_api_gateway_rest_api.base_api.id
@@ -101,6 +118,15 @@ resource "aws_lambda_permission" "get_product" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
   function_name = module.lambda_get_product.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${aws_api_gateway_rest_api.base_api.execution_arn}/*/*"
+}
+
+resource "aws_lambda_permission" "remove_product" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda_remove_product.function_name
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_api_gateway_rest_api.base_api.execution_arn}/*/*"

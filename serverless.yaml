@@ -37,3 +37,10 @@ functions:
       - http:
           path: products/{id}
           method: get
+
+  remove-product:
+    handler: src/controllers/products/remove/index.handler
+    events:
+      - http:
+          path: products/{id}
+          method: delete
