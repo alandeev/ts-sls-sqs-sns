@@ -19,9 +19,9 @@ const responses = {
     return responses._construct(200, data);
   },
 
-  _internal: () => {
+  _internal: (message) => {
     return responses._construct(500, {
-      error: "Server internal error"
+      error: message || "Server internal error"
     })
   }
 }

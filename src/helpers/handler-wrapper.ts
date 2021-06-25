@@ -14,7 +14,8 @@ const handlerWrapper = (fn) => {
         return responses._error(error.message, error.details)
       }
 
-      return responses._internal()
+      console.log(error);
+      return responses._internal(error.message)
     }
   }
 }

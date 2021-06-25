@@ -1,7 +1,7 @@
 node_modules
 .build
-infra/.terraform*
-terraform*
-terraform.*
+**.terraform*
+**/terraform*
+**/terraform.*
 .serverless
 .webpack
