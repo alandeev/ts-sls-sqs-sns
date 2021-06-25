@@ -1,5 +1,6 @@
 class ValidationError extends Error {
-  details = null;
+  statusCode = 400;
+  details = [];
   isTreated = true;
 
   constructor(message: string, details?: any) {

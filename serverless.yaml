@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: us-east-1
+  profile: learn-sns
   environment:
     DYNAMO_TABLE_PRODUCTS: products
 
@@ -16,5 +17,19 @@ functions:
     handler: src/controllers/products/create/index.handler
     events:
       - http:
-          path: products/create
+          path: products
           method: post
+
+  get-products:
+    handler: src/controllers/products/get/index.handler
+    events:
+      - http:
+          path: products
+          method: get
+
+  get-product-by-id:
+    handler: src/controllers/products/get-by-id/index.handler
+    events:
+      - http:
+          path: products/{id}
+          method: get

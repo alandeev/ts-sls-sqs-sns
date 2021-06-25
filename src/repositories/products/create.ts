@@ -10,7 +10,7 @@ interface ICreate {
   price: String;
 }
 
-const create = async ({
+const createProduct = async ({
   name,
   description,
   price
@@ -40,4 +40,4 @@ const create = async ({
   }
 }
 
-export default create;
+export default createProduct;

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "debug": "sls offline --noPrependStageInUrl"
+    "start": "sls offline --noPrependStageInUrl",
+    "debug": "sls offline --noPrependStageInUrl",
+    "build": "sls package"
   },
   "keywords": [],
   "author": "alandev2",
