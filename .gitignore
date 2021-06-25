@@ -3,3 +3,5 @@ node_modules
 infra/.terraform*
 terraform*
 terraform.*
+.serverless
+.webpack

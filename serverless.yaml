@@ -8,8 +8,12 @@ provider:
   environment:
     DYNAMO_TABLE_PRODUCTS: products
 
+
+package:
+  individually: true
+
 plugins:
-  - serverless-plugin-typescript
+  - serverless-webpack
   - serverless-offline
 
 functions:
@@ -27,7 +31,7 @@ functions:
           path: products
           method: get
 
-  get-product-by-id:
+  get-product:
     handler: src/controllers/products/get-by-id/index.handler
     events:
       - http:
