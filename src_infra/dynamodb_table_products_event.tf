@@ -1,6 +1,6 @@
 resource "aws_lambda_event_source_mapping" "products_source_mapping" {
   event_source_arn =  aws_dynamodb_table.products_events.stream_arn
-  function_name = module.lambda_event_processor.arn
+  function_name = module.event_processor.arn
   starting_position = "LATEST"
 
   depends_on = [

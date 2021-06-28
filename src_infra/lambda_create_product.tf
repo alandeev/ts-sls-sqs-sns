@@ -22,6 +22,7 @@ module "lambda_create_product" {
   handler       = "src/controllers/products/create/index.handler"
 
   enviroments = {
-    DYNAMO_TABLE_PRODUCTS: "products"
+    DYNAMO_TABLE_PRODUCTS: "products",
+    DYNAMO_TABLE_PRODUCTS_EVENTS: "products-events"
   }
 }

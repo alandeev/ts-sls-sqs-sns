@@ -28,9 +28,27 @@ const createProduct = async ({
   }
 
   try{
-    await dynamodb.put({
-      TableName: process.env.DYNAMO_TABLE_PRODUCTS as string,
-      Item: product
+    await dynamodb.transactWrite({
+      TransactItems: [
+        {
+          Put: {
+            TableName: process.env.DYNAMO_TABLE_PRODUCTS as string,
+            Item: product
+          },
+        },
+        {
+          Put: {
+            TableName: process.env.DYNAMO_TABLE_PRODUCTS_EVENTS as string,
+            Item: {
+              id,
+              action: 'product.created',
+              data_event: {
+                ...product
+              }
+            }
+          },
+        }
+      ]
     }).promise()
 
     return product;
