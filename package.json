@@ -6,7 +6,7 @@
   "scripts": {
     "start": "sls offline --noPrependStageInUrl",
     "debug": "sls offline --noPrependStageInUrl",
-    "build": "sls package --package build"
+    "build": "node --max-old-space-size=4096 node_modules/.bin/serverless package --package build"
   },
   "keywords": [],
   "author": "alandev2",

@@ -11,8 +11,7 @@ provider:
 
 custom:
   webpack:
-    concurrency: 2 # desired concurrency, defaults to the number of available cores
-    serializedCompile: true # backward compatible, this translates to concurrency: 1
+    concurrency: 4 # desired concurrency, defaults to the number of available cores
 
 package:
   individually: true
