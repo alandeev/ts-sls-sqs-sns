@@ -9,6 +9,10 @@ provider:
     DYNAMO_TABLE_PRODUCTS: products
     DYNAMO_TABLE_PRODUCTS_EVENTS: products-events
 
+custom:
+  webpack:
+    concurrency: 2 # desired concurrency, defaults to the number of available cores
+    serializedCompile: true # backward compatible, this translates to concurrency: 1
 
 package:
   individually: true
