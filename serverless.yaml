@@ -17,6 +17,9 @@ plugins:
   - serverless-offline
 
 functions:
+  event-processor:
+    handler: src/event-processor/index.handler
+
   create-product:
     handler: src/controllers/products/create/index.handler
     events:
