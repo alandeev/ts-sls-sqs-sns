@@ -1,4 +1,8 @@
-const main = (event) => {
+const AWS = require('aws-sdk')
+
+const sns = new AWS.SNS()
+
+const main = async (event) => {
   for(const record of event.Records) {
     if(record.eventName !== "INSERT") {
       console.warn({
@@ -8,10 +12,15 @@ const main = (event) => {
       return;
     }
 
-    console.info({
-      message: "EVENTO PROCESSADO COM SUCESSO",
-      event: JSON.stringify(record)
-    })
+    const tableName = 'products-events'
+
+    const params = {
+      Message: JSON.stringify(record),
+      TopicArn: `arn:aws:sns:us-east-1:050587934116:${tableName}`
+    };
+
+
+    await sns.publish(params).promise()
   }
 }
 

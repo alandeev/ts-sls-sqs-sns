@@ -36,4 +36,8 @@ module "event_processor" {
   enviroments = {
     DYNAMO_TABLE_PRODUCTS: "products"
   }
+
+  depends_on = [
+    aws_dynamodb_table.products_events
+  ]
 }

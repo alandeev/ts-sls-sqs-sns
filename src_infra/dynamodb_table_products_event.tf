@@ -4,8 +4,8 @@ resource "aws_lambda_event_source_mapping" "products_source_mapping" {
   starting_position = "LATEST"
 
   depends_on = [
-    module.event_processor,
-    aws_dynamodb_table.products_events
+    aws_dynamodb_table.products_events,
+    module.event_processor
   ]
 }
 
