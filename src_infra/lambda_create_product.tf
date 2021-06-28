@@ -10,6 +10,7 @@ data "aws_iam_policy_document" "lambda_create_product"{
     ]
 
     resources = [
+      aws_dynamodb_table.products_events.arn,
       aws_dynamodb_table.products.arn
     ]
   }
